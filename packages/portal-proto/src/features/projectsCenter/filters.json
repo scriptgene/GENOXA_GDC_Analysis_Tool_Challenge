@@ -1,0 +1,39 @@
+{
+  "project": [
+    {
+      "name": "Primary Site",
+      "field": "projects.primary_site",
+      "doc_type": "project",
+      "type": "keyword",
+      "facet_type": "enum"
+    },
+    {
+      "name": "Program",
+      "field": "projects.program.name",
+      "doc_type": "project",
+      "type": "keyword",
+      "facet_type": "enum"
+    },
+    {
+      "name": "Disease Type",
+      "field": "projects.disease_type",
+      "doc_type": "project",
+      "type": "keyword",
+      "facet_type": "enum"
+    },
+    {
+      "name": "Data Category",
+      "field": "projects.summary.data_categories.data_category",
+      "doc_type": "project",
+      "type": "keyword",
+      "facet_type": "enum"
+    },
+    {
+      "name": "Experimental Strategy",
+      "field": "projects.summary.experimental_strategies.experimental_strategy",
+      "doc_type": "project",
+      "type": "keyword",
+      "facet_type": "enum"
+    }
+  ]
+}

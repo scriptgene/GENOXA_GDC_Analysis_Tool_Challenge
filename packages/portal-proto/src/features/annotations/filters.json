@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Project",
+    "field": "project.project_id",
+    "type": "keyword",
+    "facet_type": "enum"
+  },
+  {
+    "title": "Entity Type",
+    "field": "entity_type",
+    "type": "keyword",
+    "facet_type": "enum"
+  },
+  {
+    "title": "Category",
+    "field": "category",
+    "type": "keyword",
+    "facet_type": "enum"
+  },
+  {
+    "title": "Classification",
+    "field": "classification",
+    "type": "keyword",
+    "facet_type": "enum"
+  },
+  {
+    "title": "Created Datetime",
+    "field": "created_datetime",
+    "type": "keyword",
+    "facet_type": "datetime"
+  }
+]
