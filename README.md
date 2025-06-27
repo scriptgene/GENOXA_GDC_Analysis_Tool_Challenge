@@ -78,3 +78,9 @@ By default, this will start a dev server listening to http://localhost:3000
 ![App Screenshot](./assets/4.png)
 ![App Screenshot](./assets/5.png)
 ![App Screenshot](./assets/6.png)
+
+
+## 🎬 Local Demo Video
+
+[Click here to watch the demo](./assets/demo.mp4)
+
