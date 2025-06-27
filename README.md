@@ -55,9 +55,14 @@ npm install --save-dev @types/my-package --workspace=packages/core
 
 ## Development
 
-Initially install docker and run Docker Engine
+ Initially install docker 
 
-Run the backend server by going into root --> gdc-docker-backend, which helps to run the docker image
+Build docker image by going into the specific directory --> gc-docker-backend --> NCI_GENOXA_Lite
+```bash
+docker build -t genoxa .
+```
+
+Run the backend server by going into root --> gdc-docker-backend, then build the docker image and then run the docker image
 ```bash
 node server.js
 ```

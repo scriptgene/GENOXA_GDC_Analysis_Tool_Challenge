@@ -1,0 +1,342 @@
+/* General body styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* Light gray background for the whole page */
+}
+
+/* Sidebar styling */
+.main-sidebar {
+  background-color: #ffffff !important; /* Force white background for the sidebar */
+  color: #333333; /* Dark text color */
+  border: none;
+}
+
+.main-sidebar .user-panel {
+  background-color: #ffffff !important; /* White background for user panel */
+  color: #333333; /* Dark text color */
+}
+
+.main-sidebar .user-panel .image {
+  background-color: #ffffff !important; /* White background for user image area */
+}
+
+.main-sidebar .user-panel .info {
+  background-color: #ffffff !important; /* White background for user info area */
+  color: #333333; /* Dark text color */
+}
+
+/* Sidebar menu */
+.main-sidebar .sidebar-menu {
+  background-color: #ffffff !important; /* White background for sidebar menu */
+}
+
+/* Sidebar menu items */
+.main-sidebar .sidebar-menu > li > a {
+  background-color: #ffffff !important; /* White background for menu items */
+  color: #333333; /* Dark text color */
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: block;
+  transition: background-color 0.3s, color 0.3s;
+  border: none; /* Remove any borders */
+}
+
+.main-sidebar .sidebar-menu > li > a:hover,
+.main-sidebar .sidebar-menu > li.active > a {
+  background-color: #e87b07 !important; /* Blue color for active or hovered menu items */
+  color: #ffffff; /* White text color */
+}
+
+/* Sidebar submenu items */
+.main-sidebar .sidebar-menu .treeview-menu {
+  background-color: #ffffff !important; /* White background for submenu items */
+}
+
+.main-sidebar .sidebar-menu .treeview-menu > li > a {
+  background-color: #ffffff !important; /* White background for submenu items */
+  color: #333333; /* Dark text color */
+  padding: 10px 15px;
+  display: block;
+  transition: background-color 0.3s, color 0.3s;
+  border: none; /* Remove any borders */
+}
+
+.main-sidebar .sidebar-menu .treeview-menu > li > a:hover,
+.main-sidebar .sidebar-menu .treeview-menu > li.active > a {
+  background-color: #e87b07 !important; /* Blue color for active or hovered submenu items */
+  color: #ffffff; /* White text color */
+}
+
+/* Collapsed sidebar styling */
+.sidebar-collapse .main-sidebar {
+  background-color: #ffffff !important; /* White background for collapsed sidebar */
+}
+
+.sidebar-collapse .main-sidebar .sidebar-menu > li > a {
+  background-color: #ffffff !important; /* White background for menu items in collapsed state */
+  color: #333333; /* Dark text color */
+}
+
+.sidebar-collapse .main-sidebar .sidebar-menu > li > a:hover,
+.sidebar-collapse .main-sidebar .sidebar-menu > li.active > a {
+  background-color: #e87b07 !important; /* Blue color for active or hovered menu items in collapsed state */
+  color: #ffffff; /* White text color */
+}
+
+/* Input elements in sidebar */
+.main-sidebar .shiny-input-container {
+  background-color: #ffffff !important; /* White background for input containers */
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.main-sidebar .shiny-input-container input[type='text'],
+.main-sidebar .shiny-input-container input[type='file'],
+.main-sidebar .shiny-input-container select,
+.main-sidebar .shiny-input-container textarea {
+  background-color: #ffffff !important; /* White background for inputs */
+  color: #333333; /* Dark text color */
+  border: 1px solid #e87b07; /* Blue border color */
+  border-radius: 2px;
+  padding: 2px;
+  transition: border-color 0.3s;
+}
+
+.main-sidebar .shiny-input-container input[type='text']:focus,
+.main-sidebar .shiny-input-container input[type='file']:focus,
+.main-sidebar .shiny-input-container select:focus,
+.main-sidebar .shiny-input-container textarea:focus {
+  border-color: #e87b07; /* Darker blue border on focus */
+}
+
+/* Action buttons */
+.main-sidebar .btn {
+  background-color: #e87b07 !important; /* Blue background for buttons */
+  color: #ffffff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  padding: 7px 10px;
+  transition: background-color 0.3s;
+}
+
+.main-sidebar .btn:hover {
+  background-color: #e87b07 !important; /* Darker blue on hover */
+}
+
+/* Content wrapper */
+.content-wrapper {
+  background-color: #ffffff !important; /* White background for content area */
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* Box styles */
+.box {
+  border-radius: 2px;
+}
+
+.box.box-solid.box-primary {
+  border: 1px solid #e87b07; /* Blue border for primary boxes */
+}
+
+/* Expanded sidebar items */
+#sidebarItemExpanded {
+  background-color: #ffffff !important; /* White background */
+  color: #333333; /* Dark text color */
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid #dddddd; /* Light gray border */
+}
+
+#sidebarItemExpanded:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+  color: #333333; /* Dark text color */
+}
+
+/* Style for all tabs */
+  .nav-tabs > li > a {
+    background-color: #ffffff; /* Background color for inactive tabs */
+    border: 1px solid #e87b07; /* Border color for inactive tabs */
+    border-radius: 3px; /* Rounded corners */
+  }
+
+.nav-tabs > li.active > a {
+  background-color: #e87b07; /* Background color for active tab */
+  color: #333333; /* Text color for active tab */
+  border: 1px solid #e87b07; /* Border color for active tab */
+  border-bottom-color: transparent; /* Remove bottom border for active tab */
+}
+
+/* Style for the tab container */
+.nav-tabs {
+  border-bottom: 1px solid #e87b07; /* Bottom border for the tab box */
+  background-color: #ffffff; /* Background color for the entire tab container */
+}
+
+/* Optionally, if you want to ensure that the tabs are visible on the solid blue background */
+.nav-tabs > li > a {
+  color: #333333; /* Text color for tabs to stand out against the background */
+}
+
+.nav-tabs > li.active > a {
+  color: #ffffff; /* Text color for active tab to stand out */
+}
+
+/* Custom styles for wellPanel */
+.well {
+  background-color: #d8ffd1; /* Light green background color */
+  border: 1px solid #e0e0e0; /* Light gray border color */
+  color: #333333; /* Dark text color */
+  padding: 10px; /* Padding for better spacing */
+  border-radius: 4px; /* Rounded corners for a modern look */
+}
+
+/* Custom styles for tab pane */
+.tab-content > .tab-pane {
+  background-color: #ffffff; /* White background color for all tab panes */
+}
+
+/* Custom styles for the active tab pane */
+.tab-content > .tab-pane.active {
+  background-color: #ffffff; /* White background color for active tab pane */
+  color: #333333; /* Dark text color */
+}
+
+/* Text color updates */
+h1, h2, h3, h4, h5, h6 {
+  color: #333; /* Darker text color for better readability */
+}
+
+p {
+  color: #333; /* Slightly lighter text color for paragraphs */
+}
+
+/* Ensure the sidebar and content area have consistent background color */
+.container {
+  max-width: 1000px; /* Adjust this value as needed */
+  margin: 0 auto;
+  padding: 5px; /* Padding for a more compact design */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  background-color: #ffffff; /* White background to match the new design */
+  border-radius: 4px; /* Rounded corners for a modern look */
+}
+
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.sidebar {
+  padding: 2px; /* Further reduced padding for a more compact design */
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  padding: 2px; /* Further reduced padding for a more compact design */
+  box-sizing: border-box;
+  background-color: #ffffff; /* Ensure content background matches the sidebar */
+  border-radius: 2px; /* Rounded corners for consistency */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 2px; /* Consistent padding for smaller screens */
+  }
+  
+  .sidebar,
+  .content-wrapper {
+    padding: 2px; /* Consistent padding for smaller screens */
+  }
+}
+
+/* Expanded sidebar items */
+#sidebarItemExpanded {
+  background-color: #ffffff !important; /* White background */
+  color: #333333; /* Dark text color */
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  border: none; /* Remove border */
+}
+
+#sidebarItemExpanded:hover {
+  background-color: #ffffff; /* Light gray on hover */
+  color: #333333; /* Dark text color */
+}
+
+#sidebarItemExpanded > ul > li.treeview.active > ul {
+  border: 1px solid #000000; /* Black border */
+}
+
+
+/* Center the content in the modal footer */
+/* Style the OK button */
+.modal-footer .btn-default {
+  background-color: #e87b07; /* Set button background color */
+  border-color: #e87b07; /* Set button border color */
+  color: white; /* Set button text color */
+  font-size: 16px; /* Increase button text size */
+  text-align: center; /* Center text within the button */
+  padding: 10px 20px; /* Add padding for better appearance */
+  border-radius: 5px; /* Round button corners for a better look */
+}
+
+/* Hover state for the OK button */
+.modal-footer .btn-default:hover {
+  background-color: #e87b07; /* Darker background color on hover */
+  border-color: #e87b07; /* Darker border color on hover */
+}
+
+.modal-footer {
+  text-align: center; /* Center text within the button */
+}
+
+/* Center the modal title */
+.modal-title {
+  text-align: center;
+  font-size: 25px; /* Increase text size */
+}
+
+/* Center the modal body content */
+.modal-body {
+  text-align: center;
+  font-size: 20px; /* Increase text size */
+}
+
+/* custom.css */
+body > div.sweet-alert.alert-size-s.showSweetAlert.visible > div.sa-button-container > button.confirm {
+  background-color: #e87b07 !important;
+  border-color: #e87b07 !important;
+  color: white; /* Optional: Change text color to white for better contrast */
+}
+
+body > div.sweet-alert.alert-size-s.showSweetAlert.visible > div.sa-button-container > button.confirm:hover {
+  background-color: #e87b07 !important; /* Optional: Darker shade on hover */
+  border-color: #e87b07 !important;
+}
+
+.box.box-solid.box-success {
+  border: 1px solid white; /* Border color same as background */
+}
+
+.box.box-solid.box-success > .box-header {
+  background-color: #e87b07; /* Custom background color */
+}
+
+h3.box-title {
+    color: white;
+}
+
+/* styles.css */
+.info-box-content p {
+    color: white;
+    font-size: 18px; /* Increase text size */
+    font-weight: bold; /* Make text bold */
+}
+
+.container {
+    border: 1.5px solid #e87b07;
+}

@@ -1,0 +1,115 @@
+---
+title: "GENOXA Ver 0.2 Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+params:
+  dp1: NA
+  dp2: NA
+  dp3: NA
+  refg: NA
+  dex1: NA
+  dex2: NA
+  dex3: NA
+  organismDb: NA
+  keytype: NA
+  ontt: NA
+  minGSSize: NA
+  maxGSSize: NA
+  pvalueCutoff: NA
+  qvalueCutoff: NA
+  pAdjustMethod: NA
+  r1: NA
+  samp1: NA
+  Filt_counts_1: NA
+  filt2c: NA
+  total_genes: NA,
+  upregulated_genes: NA,
+  downregulated_genes: NA,
+  gms1: NA
+  gms2: NA
+  gmgmt1: NA
+  gmgmt3: NA
+  gmgmt4: NA
+  gmgmt5: NA
+  
+output: 
+  pdf_document:
+    fig_caption: yes
+    toc: true
+    number_sections: true
+  word_document:
+    fig_caption: yes
+    toc: true
+  html_document:
+    fig_caption: yes
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(opts.label="kill_prefix") # Remove line number and comment "##" from printing
+```
+
+## Method details
+
+In the analysis of bulk RNA-seq data, we employed the `edgeR (v. 4.0.16)` (Chen Y, et al., 2024) and `limma (v. 3.58.1)` (Ritchie, Matthew E., et al., 2015) packages in R programming language, integrating several parameter settings for customization. Data preprocessing was initiated by filtering the raw read counts based on total row sums using `rowSums` as `r params$dp1` and the `FilterByExpr` function, using thresholds of `r params$dp2`. For normalization, we applied the `calcNormFactors` function, selecting the `r params$dp3` method to adjust for library size variations. The preprocessing step was followed by constructing a `DGEList` object from the count matrix, filtering out lowly expressed genes as needed. In the differential expression analysis, we selected `r params$refg` as base or reference group. We created a design matrix to model the experimental conditions and specified contrasts for comparing the selected groups. The mean-variance relationship was addressed by applying the `voom` transformation to the data. We then fit a linear model to the data using `lmFit`, and conducted empirical Bayes moderation of the standard errors with `eBayes` to improve statistical inference. We used a cutoff of \<= `r params$dex1` for `p-value` and `Adjusted p-value` and an `absolute log2-fold change (log2FC)` threshold of \>= `r params$dex2` to identify differentially expressed genes. The "`r params$dex3`" method was employed for adjusting p-values to control the false discovery rate.
+
+In our Gene Ontology (GO) over-representation analysis, we employed specific parameters using `enrichGO` function by `clusterProfiler (v. 4.10.1)` (Xu S, et al., 2024) R package to tailor the process. We selected the `r params$organismDb` database for gene annotation. For gene identifier mapping, we used `r params$keytype` as the key type. The analysis focused on "`r params$ontt`" GO subontologies. To refine our results, we set a minimum gene set size of `r params$minGSSize` and a maximum of `r params$maxGSSize`, with statistical significance determined by a p-value cutoff of `r params$pvalueCutoff` and a q-value cutoff of `r params$qvalueCutoff`. For multiple testing correction, we applied the `r params$pAdjustMethod` method. These settings ensured an effective and focused assessment of GO term enrichment relevant to our dataset. KEGG pathway analysis was performed using `enrichKEGG` function by `clusterProfiler (v. 4.10.1)` (Xu S, et al., 2024) R package using the same parameters used for `enrichGO`.
+
+For gene modeling using ML models, we utilized the `caret (v. 6.0-94)` (Kuhn, Max, 2008) R package. We performed the analysis using `voom` normalized data and group information from the sample metadata file. For data splitting, we set the size of the training dataset to `r params$gms1` and used `r params$gms2` as the random seed. For model training, we specified `r params$gmgmt1` as the resampling method, `r params$gmgmt3` as the number of resampling iterations, and `r params$gmgmt4` as the random seed. The machine learning algorithm chosen for predicting genes were `r params$gmgmt5`.
+
+------------------------------------------------------------------------
+
+## Results
+
+In the data analysis, we initially included a total of `r nrow(params$r1)` raw gene counts and `r nrow(params$samp1)` samples. During the first step of data preprocessing using the `rowSums` function, we filtered down to `r nrow(params$Filt_counts_1)` genes. Subsequently, a second filtering step was performed using the `FilterByExpr` function, resulting in `r nrow(params$filt2c)` genes that were retained for further analysis. We identified total `r params$total_genes` differentially expressed genes, of these `r params$upregulated_genes` are up-regulated genes and `r params$downregulated_genes` are downregulated genes.
+
+------------------------------------------------------------------------
+
+## Quick summary of parameters used:
+
+### Data Preprocessing:
+
+-   Filter raw reads by total row sums: [`r params$dp1`]{style="color:blue"}
+-   Filter raw reads by FilterByExpr: [`r params$dp2`]{style="color:blue"}
+-   Normalization method for calcNormFactors: [`r params$dp3`]{style="color:blue"}
+
+### Differential expression analysis:
+
+-   Reference group for DE: [`r params$refg`]{style="color:blue"}
+-   Cutoff value for for *p-value* and *adjusted p-value*: \<= [`r params$dex1`]{style="color:blue"}
+-   Minimum absolute log2-fold change (log2FC) to use as threshold for differential expression: \>= [`r params$dex2`]{style="color:blue"}
+-   Adjustment method: [`r params$dex3`]{style="color:blue"}
+
+### GO over-representation:
+
+-   Organism Database: [`r params$organismDb`]{style="color:blue"}
+-   Key Type: [`r params$keytype`]{style="color:blue"}
+-   Subontology: [`r params$ontt`]{style="color:blue"}
+-   Minimum Gene Set Size: [`r params$minGSSize`]{style="color:blue"}
+-   Maximum Gene Set Size: [`r params$maxGSSize`]{style="color:blue"}
+-   P-Value Cutoff: [`r params$pvalueCutoff`]{style="color:blue"}
+-   q-Value Cutoff: [`r params$qvalueCutoff`]{style="color:blue"}
+-   Adjust Method: [`r params$pAdjustMethod`]{style="color:blue"}
+
+### Gene modeling using ML:
+
+-   `Parameters for split data`
+-   The size of the training data set: [`r params$gms1`]{style="color:blue"}
+-   Seed value: [`r params$gms2`]{style="color:blue"}
+-   `Parameters for train models`
+-   Resampling method to use: [`r params$gmgmt1`]{style="color:blue"}
+-   Number of resampling iterations: [`r params$gmgmt3`]{style="color:blue"}
+-   Random number seed: [`r params$gmgmt4`]{style="color:blue"}
+-   ML algorithms: [`r params$gmgmt5`]{style="color:blue"}
+
+------------------------------------------------------------------------
+
+## References
+
+[1] Chen Y, Chen L, Lun ATL, Baldoni P, Smyth GK (2024). “edgeR 4.0: powerful differential analysis of sequencing data with expanded functionality and improved support for small counts and larger datasets.” bioRxiv. <doi:10.1101/2024.01.21.576131>.
+
+[2] Ritchie, Matthew E., et al. "limma powers differential expression analyses for RNA-sequencing and microarray studies." Nucleic acids research 43.7 (2015): e47-e47.
+
+[3] Xu S, Hu E, Cai Y, Xie Z, Luo X, Zhan L, Tang W, Wang Q, Liu B, Wang R, Xie W, Wu T, Xie L, Yu G (2024). “Using clusterProfiler to characterize multiomics data.” Nature Protocols. ISSN 1750-2799, <doi:10.1038/s41596-024-01020-z>, <https://www.nature.com/articles/s41596-024-01020-z>.
+
+[4] Kuhn, Max (2008). “Building Predictive Models in R Using the caret Package.” Journal of Statistical Software, 28(5), 1–26. <doi:10.18637/jss.v028.i05>, <https://www.jstatsoft.org/index.php/jss/article/view/v028i05>.
