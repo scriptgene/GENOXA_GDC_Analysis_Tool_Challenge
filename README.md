@@ -41,10 +41,10 @@ React will fail to render.
 ### Adding Dependencies
 
 Dependencies can also be installed from the root of the repository.
-To install a dependency for a specific workspace, you can run:
+Error might occured for magin string module, run this command:-
 
 ```bash
-npm install --save my-package --workspace=packages/core
+npm install @napi-rs/magic-string-darwin-x64
 ```
 
 Since this is a TypeScript project, installing the community type definitions may also be required:
@@ -55,7 +55,14 @@ npm install --save-dev @types/my-package --workspace=packages/core
 
 ## Development
 
-Run the prototype in dev mode with auto-rebuilding:
+Initially install docker and run Docker Engine
+
+Run the backend server by going into root --> gdc-docker-backend, which helps to run the docker image
+```bash
+node server.js
+```
+
+Run the prototype in dev mode with auto-rebuilding into new terminal:
 
 ```bash
 npm run dev
@@ -63,163 +70,11 @@ npm run dev
 
 By default, this will start a dev server listening to http://localhost:3000
 
-Note: Recompiling the type definitions for core needs to be done manually:
+## 🖼️ Screenshot
 
-```bash
-npm run compile --w=packages/core
-```
-
-### Linting
-
-Run ESLint for all of the workspaces:
-
-```bash
-npm run lint
-```
-
-### Formatting
-
-Run prettier for all of the workspaces:
-
-```bash
-npm run format
-```
-
-## Testing
-
-This project uses `jest` for testing.
-
-### Naming Convention
-
-| Test Type   | Filename         |
-| ----------- | ---------------- |
-| Unit        | `*.unit.test.ts` |
-| Integration | `*.int.test.ts`  |
-
-### Locations
-
-Tests should live in the same directory as if a single module is under test. Since unit tests should only test a single module, they should also live in the directory.
-For example,
-
-```
-+ /src
-| - monarch.ts
-| - monarch.unit.ts
-| - monarch.int.ts
-```
-
-### Running tests
-
-`npm run test` will run unit tests.
-
-`npm run test:int` will run integration tests.
-
-`npm run test:all` will run both unit and integration tests.
-
-### Running the portal in Docker
-
-The portal has support for running in a Docker container
-To create a docker container:
-
-```
- docker build -t GDCV2 .
-```
-
-to run it:
-
-```
- docker run -p 3000:3000 -t GDCV2
-```
-
-### Running Auth in Localhost (Login and other Auth related actions)
-
-1. [Open Chrome (web browser)](https://alfilatov.com/posts/run-chrome-without-cors/) which disables web security to suppress the CORS warning.
-   Or, if using Safari for feature testing with a logged-in user, click Develop -> Disable Cross-Origin Restrictions.
-2. Configure your machine to map `localhost.gdc.cancer.gov` (or a similar subdomain) to resolve to `127.0.0.1`.
-
-   In Mac or Linux, edit the file `/etc/hosts` (You need to give sudo access to edit this file), add the following line:
-
-   ```
-       127.0.0.1   localhost localhost.gdc.cancer.gov
-   ```
-
-3. Since the `sessionid` cookie can only be send through `HTTPS`, you need to [add https to your localhost](https://dev.to/defite/adding-https-to-your-localhost-15hg).
-
-```
-local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem
-```
-
-4. After these steps, you can access the app on `https://localhost.gdc.cancer.gov:3010`.
-5. Even after all these steps you will see `SecurityError: Blocked a frame with origin "https://localhost.gdc.cancer.gov:3010" from accessing a cross-origin frame` error. But you can close the error and refresh the page. This warning will be suppressed in production.
-6. Now you can Login and use features that are available with Authentication.
-7. For developing 3rd party tools with its own server API endpoint or URL:
-
-- Create a ssl-proxy.json file, using the template below with example proxy names and port numbers:
-
-```json
-{
-  "GFF v2 proxy": {
-    "source": 3010,
-    "target": 3001,
-    "key": "localhost-key.pem",
-    "cert": "localhost.pem",
-    "hostname": "localhost"
-  },
-  "MyTool proxy": {
-    "source": 3011,
-    "target": 3000,
-    "key": "localhost-key.pem",
-    "cert": "localhost.pem",
-    "hostname": "localhost"
-  }
-}
-```
-
-- run the following
-
-```bash
-mkcert localhost
-local-ssl-proxy --config path/to/ssl-proxy.json --cert localhost.pem --key localhost-key.pem
-```
-
-### Mock server
-
-A mock server can be used to mock responses from outside clients. This can be useful for testing auth related issues. To set up your dev
-site to use the mock server:
-
-1. Create a certificate for your mock server, detailed here: https://www.mocks-server.org/docs/guides/https-protocol/#creating-a-self-signed-certificate. Use `mock-server-key.pem` and `mock-server-cert.pem` for names.
-2. Uncomment `https://localhost:3100` in next.config.js
-3. Set your dev site to point at the mock server for auth calls with `export NEXT_PUBLIC_GDC_AUTH=https://localhost:3100` and restart the dev site
-4. Start the mock server with `npm run mocks`. In the mock server process, you can select `Use route variant` to toggle between different responses.
-
-## Version
-
-Update the versions of all workspaces at the same time. (Replace 2.13.0 with the new version to set)
-
-```bash
-npm run version -- 2.13.0
-```
-
-## Documentation
-
-Run build-docs to generate documentation for "portal-proto" and "core" packages
-For developing applications for the GDC Portal, please review
-[Developer Guide](https://docs.gdc.cancer.gov/Data_Portal/Users_Guide/Developers_Guide).
-
-```bash
-npm run build-docs
-```
-
-After generation documentation can be found in the [docs folder](/docs/)
-
-## Project Structure
-
-This project is a monorepo managed by [lerna](https://lerna.js.org). It is composed of the following packages:
-
-- `packages/core`: Contains the state management and function for accessing the APIs of the GDC.
-- `packages/portal-proto`: The GDC Frontend Framework prototype. This is the main package for the project. It uses NextJS
-  as the application framework and React as the UI framework. For basic components we use [Mantine.dev](https://v6.mantine.dev/) (version 6), as the UI library as it compatiable
-  with our design system and use of [Tailwind CSS](https://tailwindcss.com). Please note that before the final release
-  the package will be renamed to `packages/portal`.
-- `packages/sapien`: is the package that contains the Bodyplot UI used on the GDC Portal V2 home page.
-- `packages/lighthouse`: is the package that contains the Lighthouse UI used on the GDC Portal V2 home page for testing performance.
+![App Screenshot](./assets/1.png)
+![App Screenshot](./assets/2.png)
+![App Screenshot](./assets/3.png)
+![App Screenshot](./assets/4.png)
+![App Screenshot](./assets/5.png)
+![App Screenshot](./assets/6.png)
