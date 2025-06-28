@@ -1,6 +1,6 @@
-# GDC Frontend Framework
+# GENOXA: A Tool for Analyzing Bulk RNA-Seq Data and Building Machine Learning Models with Differentially Expressed Genes
 
-## Installation
+## 1. GDC Frontend Framework Installation
 
 ### Prerequisites
 
@@ -53,7 +53,7 @@ Since this is a TypeScript project, installing the community type definitions ma
 npm install --save-dev @types/my-package --workspace=packages/core
 ```
 
-## Development
+## 2. Create docker image of GENOXA App
 
  Initially install docker 
 
@@ -66,6 +66,7 @@ Run the backend server by going into root --> gdc-docker-backend, then build the
 ```bash
 node server.js
 ```
+## 3. Development
 
 Run the prototype in dev mode with auto-rebuilding into new terminal:
 
