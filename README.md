@@ -1,4 +1,4 @@
-# GENOXA: A Tool for Analyzing Bulk RNA-Seq Data and Building Machine Learning Models with Differentially Expressed Genes
+# GENOXA: A bioinformatics tool to analyze, integrate and visualize bulk RNA-Seq and clinical data with an option to use ML algorithms
 
 ### TCGA Data from GDC Data Portal Integrated with GENOXA Tool
 
