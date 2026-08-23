@@ -81,7 +81,7 @@ node server.js
 
 ## Screenshots
 
-![App dashboard](screenshots/dashboard.png)
+![App dashboard](screenshots/1.png)
 
 <img src="screenshots/1.png" width="600">
 
