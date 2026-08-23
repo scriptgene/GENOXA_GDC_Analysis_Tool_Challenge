@@ -73,6 +73,12 @@ cd gdc-docker-backend\
 node server.js
 ```
 
+### Steps to Replicate in Original Repo
+1. Replace the registeredApps.tsx file which is in this location:- ```gdc-frontend-framework\packages\portal-proto\src\features\user-flow\workflow\registeredApps.tsx```
+2. Create a file name SagarPatel_GENOXA.tsx in this location ```gdc-frontend-framework\packages\portal-proto\src\features\apps\{file_name}```
+3. Create a folder name genoxa and inside that create a file name GenoxaCaseCount.ts -- location ```gdc-frontend-framework\packages\portal-proto\src\features\{folder_name}\{file_name}```
+   
+
 ## Project Structure
 
 This project is a monorepo managed by [lerna](https://lerna.js.org). It is composed of the following packages:
