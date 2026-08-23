@@ -81,9 +81,9 @@ node server.js
 
 ## Screenshots
 
-![Reneredimage](screenshots/1.png)
-
 <img src="screenshots/1.png" width="600">
+<img src="screenshots/2.png" width="600">
+<img src="screenshots/3.png" width="600">
 
 ## Project Structure
 
