@@ -1,28 +1,27 @@
-import SelectionPanel from "@/features/set-operations/SelectionPanel";
-import AdditionalCohortSelection from "@/features/cohortComparison/AdditionalCohortSelection";
-import DownloadAllButton from "@/features/cDave/DownloadAllButton";
 import SearchInput from "@/components/SearchInput";
-import ClinicalDataIcon from "public/user-flow/icons/apps/ClinicalData.svg";
-import CohortBuilderIcon from "public/user-flow/icons/apps/CohortBuilder.svg";
-import MutationFrequencyIcon from "public/user-flow/icons/apps/MutationsFrequency.svg";
-import RepositoryIcon from "public/user-flow/icons/database.svg";
-import ProjectsIcon from "public/user-flow/icons/crowd-of-users.svg";
-import CohortComparisonIcon from "public/user-flow/icons/apps/CohortComparison.svg";
-import SetOperationsIcon from "public/user-flow/icons/apps/SetOperations.svg";
-import SequenceReadsIcon from "public/user-flow/icons/apps/SequenceReads.svg";
-import BAMSlicingDownloadIcon from "public/user-flow/icons/apps/BAMSlicingDownload.svg";
-import CohortLevelMAFIcon from "public/user-flow/icons/apps/CohortLevelMAF.svg";
-import ProteinPaintIcon from "public/user-flow/icons/apps/ProteinPaint.svg";
-import OncoMatrixIcon from "public/user-flow/icons/apps/OncoMatrix.svg";
-import GeneExpressionIcon from "public/user-flow/icons/apps/GeneExpression.svg";
-import ScRNASeqIcon from "public/user-flow/icons/apps/scRNASeq.svg";
-import CopyNumberSegmentIcon from "public/user-flow/icons/apps/CopyNumberSegment.svg";
-import CorrelationPlotIcon from "public/user-flow/icons/apps/CorrelationPlot.svg";
-import IDCViewerIcon from "public/user-flow/icons/apps/IDCViewer.svg";
-import { useLazyScRNAseqCaseCountQuery } from "../../proteinpaint/scRNAseqCaseCount";
-import { useLazyCnvSegmentCaseCountQuery } from "../../proteinpaint/CnvSegmentCaseCount";
+import DownloadAllButton from "@/features/cDave/DownloadAllButton";
+import AdditionalCohortSelection from "@/features/cohortComparison/AdditionalCohortSelection";
+import SelectionPanel from "@/features/set-operations/SelectionPanel";
 import { CountHookRegistry } from "@gff/core";
 import { AppRegistrationEntry } from "@gff/portal-components";
+import BAMSlicingDownloadIcon from "public/user-flow/icons/apps/BAMSlicingDownload.svg";
+import ClinicalDataIcon from "public/user-flow/icons/apps/ClinicalData.svg";
+import CohortBuilderIcon from "public/user-flow/icons/apps/CohortBuilder.svg";
+import CohortComparisonIcon from "public/user-flow/icons/apps/CohortComparison.svg";
+import CohortLevelMAFIcon from "public/user-flow/icons/apps/CohortLevelMAF.svg";
+import CopyNumberSegmentIcon from "public/user-flow/icons/apps/CopyNumberSegment.svg";
+import GeneExpressionIcon from "public/user-flow/icons/apps/GeneExpression.svg";
+import MutationFrequencyIcon from "public/user-flow/icons/apps/MutationsFrequency.svg";
+import OncoMatrixIcon from "public/user-flow/icons/apps/OncoMatrix.svg";
+import ProteinPaintIcon from "public/user-flow/icons/apps/ProteinPaint.svg";
+import ScRNASeqIcon from "public/user-flow/icons/apps/scRNASeq.svg";
+import SequenceReadsIcon from "public/user-flow/icons/apps/SequenceReads.svg";
+import SetOperationsIcon from "public/user-flow/icons/apps/SetOperations.svg";
+import ProjectsIcon from "public/user-flow/icons/crowd-of-users.svg";
+import RepositoryIcon from "public/user-flow/icons/database.svg";
+import { useLazyGenoxaCaseCountQuery } from "../../genoxa/GenoxaCaseCount";
+import { useLazyCnvSegmentCaseCountQuery } from "../../proteinpaint/CnvSegmentCaseCount";
+import { useLazyScRNAseqCaseCountQuery } from "../../proteinpaint/scRNAseqCaseCount";
 
 CountHookRegistry.getInstance().registerHook(
   "scRNAseqCaseCount",
@@ -32,6 +31,13 @@ CountHookRegistry.getInstance().registerHook(
 CountHookRegistry.getInstance().registerHook(
   "CnvSegmentCaseCount",
   useLazyCnvSegmentCaseCountQuery,
+);
+
+
+
+CountHookRegistry.getInstance().registerHook(
+  "genoxaCaseCount",
+  useLazyGenoxaCaseCountQuery,
 );
 
 export const COHORTS = [
@@ -128,7 +134,7 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
     id: "CohortComparisonApp",
     countsField: "caseCount",
     description:
-      "Display the survival analysis of your cohorts and compare characteristics such as sex at birth, vital status and age at diagnosis.",
+      "Display the survival analysis of your cohorts and compare characteristics such as gender, vital status and age at diagnosis.",
     noDataTooltip:
       "Current cohort does not have cases available for visualization.",
     selectionScreen: AdditionalCohortSelection,
@@ -190,7 +196,7 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
       <ProteinPaintIcon
         height={48}
         width={80}
-        style={{ margin: "0" }}
+        viewBox="-12 0 80 48"
         aria-hidden="true"
       />
     ),
@@ -211,7 +217,6 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
         className="m-auto"
         height={48}
         width={80}
-        style={{ margin: "0" }}
         aria-hidden="true"
       />
     ),
@@ -232,7 +237,6 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
         className="m-auto"
         height={48}
         width={80}
-        style={{ margin: "0" }}
         aria-hidden="true"
       />
     ),
@@ -247,32 +251,12 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
       "Current cohort does not have scRNAseq data available for visualization.",
   },
   {
-    name: "IDC Image Viewer",
-    icon: (
-      <IDCViewerIcon
-        className="m-auto"
-        height={48}
-        width={80}
-        style={{ margin: "0" }}
-        aria-hidden="true"
-      />
-    ),
-    tags: ["IDCViewer"],
-    hasDemo: false,
-    description:
-      "View histopathology and radiology images using the Imaging Data Commons (IDC) Image Viewer for current cohort.",
-    id: "IDCViewerApp",
-    countsField: "caseCount",
-    hideCounts: true,
-  },
-  {
     name: "Gene Expression Clustering",
     icon: (
       <GeneExpressionIcon
         className="m-auto"
         height={48}
         width={80}
-        style={{ margin: "0" }}
         aria-hidden="true"
       />
     ),
@@ -304,7 +288,7 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
       <CopyNumberSegmentIcon
         height={48}
         width={80}
-        style={{ margin: "0" }}
+        viewBox="-12 0 80 48"
         aria-hidden="true"
       />
     ),
@@ -317,23 +301,18 @@ export const REGISTERED_APPS: AppRegistrationEntry[] = [
       "Current cohort does not have CNV segment data available for visualization.",
   },
   {
-    name: "Correlation Plot",
-    icon: (
-      <CorrelationPlotIcon
-        height={48}
-        width={80}
-        style={{ margin: "0" }}
-        aria-hidden="true"
-      />
-    ),
-    tags: ["variantAnalysis"],
-    hasDemo: true,
+    name: "GENOXA",
+    icon: <GeneExpressionIcon aria-hidden="true" />,
+    tags: ["clinicalAnalysis"],
+    hasDemo: false,
+    countsField: "genoxaCaseCount",
+    hideCounts: false,
+    id: "SagarPatel_GENOXA",
     description:
-      "Visualize correlations between clinical and genomic variables.",
-    id: "Correlation",
-    countsField: "caseCount",
+      "Visualize differentially expressed (DE) genes with machine learning (ML) based modeling",
     noDataTooltip:
       "Current cohort does not have cases available for visualization.",
+    rightComponent: DownloadAllButton,
   },
 ];
 
