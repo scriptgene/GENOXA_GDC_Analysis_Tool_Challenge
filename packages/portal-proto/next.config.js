@@ -9,11 +9,13 @@ const connectSrc = [
   "https://browser-intake-datadoghq.com",
   "https://api.gdc.cancer.gov",
   "https://www.google-analytics.com",
-  "https://dap.digitalgov.gov",
-  "https://metrics.cancer.gov",
-  "https://storage.googleapis.com/idc-index-data-artifacts/",
   // Uncomment to use mock server for testing
-  //"https://localhost:3100",
+  "https://localhost:3001",
+  "http://localhost:3001",
+  "https://localhost:8081",
+  "http://localhost:8081",
+  "http://localhost:8080",
+  "https://localhost:8080"
 ];
 
 if (process.env.NODE_ENV == "development") {
@@ -47,7 +49,7 @@ const cspHeader = `
     script-src 'self' 'unsafe-eval' 'unsafe-inline' https://assets.adobedtm.com https://dap.digitalgov.gov https://www.googletagmanager.com https://static-dev.cancer.gov;
     style-src 'self' 'unsafe-inline';
     connect-src 'self' ${connectSrc.join(" ")};
-    frame-src https://portal.gdc.cancer.gov;
+    frame-src http://localhost:8081;
     form-action https://portal.gdc.cancer.gov;
     img-src 'self' 'unsafe-inline' blob: data: https://metrics.cancer.gov;
     font-src 'self' https://fonts.gstatic.com;
@@ -62,13 +64,32 @@ const cspHeader = `
  * @type {import('next').NextConfig}
  */
 module.exports = {
-  turbopack: {
-    rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
+  webpack(config) {
+    // Grab the existing rule that handles SVG imports
+    const fileLoaderRule = config.module.rules.find((rule) =>
+      rule.test?.test?.(".svg"),
+    );
+
+    config.module.rules.push(
+      // Reapply the existing rule, but only for svg imports ending in ?url
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/, // *.svg?url
       },
-    },
+      // Convert all other *.svg imports to React components
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        resourceQuery: { not: /url/ }, // exclude if *.svg?url
+        use: ["@svgr/webpack"],
+      },
+    );
+
+    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    fileLoaderRule.exclude = /\.svg$/i;
+
+    return config;
   },
   i18n: {
     locales: ["en"],
@@ -76,11 +97,15 @@ module.exports = {
   },
   output: "standalone",
   basePath,
-  allowedDevOrigins: ["localhost.gdc.cancer.gov"],
+  // NOTE: transpilePackages forces webpack to process these ESM-only
+  // packages directly instead of trying to require() them as CJS externals.
+  // @gff/core's dist requires 'uuid', @nci-gdc/survivalplot's dist requires 'd3'.
+  // Add more package names here if the same "Module not found: ESM packages"
+  // error shows up for a different package.
+  transpilePackages: ["uuid", "d3"],
   experimental: {
-    esmExternals: true,
+    esmExternals: "loose",
   },
-  allowedDevOrigins: ["localhost.gdc.cancer.gov"],
   env: {
     // passed via command line, `PROTEINPAINT_API=... npm run dev`
     PROTEINPAINT_API:
@@ -97,10 +122,10 @@ module.exports = {
       {
         source: "/(.*)?", // Matches all pages
         headers: [
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
+          // {
+          //   key: "X-Frame-Options",
+          //   value: "SAMEORIGIN",
+          // },
           {
             key: "Content-Security-Policy",
             value: cspHeader.replace(/\n/g, ""),

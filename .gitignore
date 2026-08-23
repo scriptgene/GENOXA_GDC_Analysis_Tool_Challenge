@@ -1,4 +1,5 @@
 node_modules
+gdc-docker-backend/node_modules
 .vscode
 venv
 .idea
