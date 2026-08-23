@@ -79,6 +79,12 @@ node server.js
 3. Create a folder name genoxa and inside that create a file name GenoxaCaseCount.ts -- location ```gdc-frontend-framework\packages\portal-proto\src\features\{folder_name}\{file_name}```
    
 
+## Screenshots
+
+![App dashboard](screenshots/dashboard.png)
+
+<img src="screenshots/1.png" width="600">
+
 ## Project Structure
 
 This project is a monorepo managed by [lerna](https://lerna.js.org). It is composed of the following packages:
