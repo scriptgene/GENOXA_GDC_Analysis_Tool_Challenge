@@ -77,7 +77,7 @@ node server.js
 1. Replace the registeredApps.tsx file which is in this location:- ```gdc-frontend-framework\packages\portal-proto\src\features\user-flow\workflow\registeredApps.tsx```
 2. Create a file name SagarPatel_GENOXA.tsx in this location ```gdc-frontend-framework\packages\portal-proto\src\features\apps\{file_name}```
 3. Create a folder name genoxa and inside that create a file name GenoxaCaseCount.ts -- location ```gdc-frontend-framework\packages\portal-proto\src\features\{folder_name}\{file_name}```
-   
+4. In packages/next.config.js we have added few urls for running docker images and localhost, for production level please comment out those urls and CORSS policy
 
 ## Screenshots
 
