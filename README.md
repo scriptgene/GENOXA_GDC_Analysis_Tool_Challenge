@@ -79,6 +79,9 @@ node server.js
 3. Create a folder name genoxa and inside that create a file name GenoxaCaseCount.ts -- location ```gdc-frontend-framework\packages\portal-proto\src\features\{folder_name}\{file_name}```
 4. In packages/next.config.js we have added few urls for running docker images and localhost, for production level please comment out those urls and CORSS policy
 
+## GENOXA tutorial
+[Watch the GENOXA tutorial on YouTube](https://youtu.be/_6toVe_wJfo)
+
 ## Screenshots
 
 <img src="screenshots/1.png" width="600">
